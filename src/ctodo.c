@@ -28,6 +28,10 @@
 #include "sync.h"
 #endif
 
+#ifdef SIMPERIUM_ENABLE
+#include "simperium.h"
+#endif
+
 #define STATUS_SAVED "Saved"
 #define STATUS_UNSAVED "Unsaved"
 
@@ -165,6 +169,10 @@ int main(int argc, char *argv[]) {
   else {
     set_option(todolist, "version", CTODO_VERSION);
   }
+
+#ifdef SIMPERIUM_ENABLE
+  struct simperium_app *app = simperium_app_init("", "");
+#endif
 
 #ifdef SYNC_ENABLE
   if (get_option_bit(todolist, "autosync")) {

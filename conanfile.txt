@@ -1,0 +1,5 @@
+[requires]
+simperium-c/0.1.0@franc0is/stable
+
+[generators]
+cmake

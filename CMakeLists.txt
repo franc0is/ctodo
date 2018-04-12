@@ -5,8 +5,12 @@ cmake_minimum_required(VERSION 2.6)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 option(SYNC_ENABLE "Enable experimental sync feature" OFF)
-option(READLINE_ENABLE "Enable readline" ON)
+option(READLINE_ENABLE "Enable readline" OFF)
+option(SIMPERIUM_ENABLE "Enable simperium" ON)
 configure_file(src/config.h.in src/config.h)
 
 find_package(Curses REQUIRED)
@@ -42,6 +46,9 @@ if(SYNC_ENABLE)
 endif()
 if(READLINE_ENABLE)
   target_link_libraries(ctodo ${READLINE_LIBRARY})
+endif()
+if(SIMPERIUM_ENABLE)
+target_link_libraries(ctodo ${CONAN_LIBS})
 endif()
 
 install(TARGETS ctodo DESTINATION bin)
